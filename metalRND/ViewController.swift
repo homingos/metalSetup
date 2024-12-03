@@ -7,17 +7,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, JoystickDelegate {
+    
     private var metalView: MetalView!
     private var joystickView: JoystickView!
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupMetalView()
         setupJoystickView()
-
     }
     
     private func setupMetalView() {
@@ -33,7 +32,11 @@ class ViewController: UIViewController {
         joystickView = JoystickView(frame: CGRect(x: self.view.bounds.midX - 50, y: self.view.bounds.midY + 250, width: 100, height: 100))
         joystickView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         joystickView.backgroundColor = .cyan
-        
+        joystickView.delegate = self
         self.view.addSubview(joystickView)
+    }
+    
+    func joystickMoved(direction: CGPoint, distance: CGFloat) {
+        print("direction: \(direction), distance: \(distance)")
     }
 }
